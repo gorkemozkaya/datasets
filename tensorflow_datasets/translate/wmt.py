@@ -398,6 +398,14 @@ _TRAIN_SUBSETS = [
         url="ftp://cwmt-wmt:cwmt-wmt@nlp.nju.edu.cn/parallel/%s.zip" % ss,
         path=("%s/*_c[hn].txt" % ss, "%s/*_en.txt" % ss))
     for ss in CWMT_SUBSET_NAMES
+] + [  
+    SubDataset(
+        name="blended_en_tr_train",
+        target="en",
+        sources={"tr"},
+        url="https://github.com/gorkemozkaya/nmt-en-tr/releases/download/blended_dataset_prep/en_tr_combined.zip",
+        path=("train.tr", "train.en"))
+    # pylint:enable=line-too-long
 ]
 
 _DEV_SUBSETS = [
@@ -568,6 +576,13 @@ _DEV_SUBSETS = [
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2018-{src}en-src.{src}.sgm",
               "dev/newstest2018-{src}en-ref.en.sgm")),
+    
+    SubDataset(
+        name="blended_en_tr_dev",
+        target="en",
+        sources={"tr"},
+        url="https://github.com/gorkemozkaya/nmt-en-tr/releases/download/blended_dataset_prep/en_tr_combined.zip",
+        path=("dev.tr", "dev.en"))
 ]
 
 DATASET_MAP = {ds.name: ds for ds in _TRAIN_SUBSETS + _DEV_SUBSETS}
